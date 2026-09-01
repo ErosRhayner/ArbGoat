@@ -5,3 +5,13 @@ from src.arbitrage.calculator import calcular_lucro_bruto
 
 lucro = calcular_lucro_bruto(preco_compra=100000, preco_venda=101000, quantidade=0.01)
 print("Lucro bruto de teste:", lucro)
+from src.arbitrage.calculator import calcular_lucro_com_taxas
+
+lucro_liquido_teste = calcular_lucro_com_taxas(
+    preco_compra=100000,
+    preco_venda=101000,
+    quantidade=0.01,
+    taxa_compra=0.001,
+    taxa_venda=0.0015
+)
+print("Lucro com taxas de teste:", lucro_liquido_teste)
