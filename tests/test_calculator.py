@@ -33,3 +33,14 @@ def test_calcular_percentual_retorno():
         taxa_compra=0.001, taxa_venda=0.0015, taxa_rede=2.0
     )
     assert round(resultado, 3) == 0.548
+from src.arbitrage.calculator import (
+    calcular_lucro_bruto,
+    calcular_lucro_com_taxas,
+    calcular_lucro_liquido,
+    calcular_percentual_retorno,
+    calcular_spread_percentual,
+)
+
+def test_calcular_spread_percentual():
+    resultado = calcular_spread_percentual(preco_compra=100000, preco_venda=101000)
+    assert round(resultado, 2) == 1.0

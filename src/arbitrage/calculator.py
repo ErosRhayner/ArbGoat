@@ -58,3 +58,15 @@ def calcular_percentual_retorno(preco_compra: float, preco_venda: float, quantid
     custo_investido = preco_compra * quantidade * (1 + taxa_compra)
     percentual_retorno = (lucro_liquido / custo_investido) * 100
     return percentual_retorno
+
+def calcular_spread_percentual(preco_compra: float, preco_venda: float) -> float:
+    """
+    Calcula a diferenca percentual bruta entre o preco de compra e o preco de venda,
+    sem considerar taxas. Usado como filtro rapido antes do calculo completo.
+
+    preco_compra: preco do ativo na corretora mais barata
+    preco_venda: preco do ativo na corretora mais cara
+    Retorna o percentual (ex: 1.0 significa 1.0%).
+    """
+    spread_percentual = ((preco_venda - preco_compra) / preco_compra) * 100
+    return spread_percentual
