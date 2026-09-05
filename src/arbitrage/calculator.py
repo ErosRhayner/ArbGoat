@@ -44,3 +44,17 @@ def calcular_lucro_liquido(preco_compra: float, preco_venda: float, quantidade: 
     lucro_com_taxas = calcular_lucro_com_taxas(preco_compra, preco_venda, quantidade, taxa_compra, taxa_venda)
     lucro_liquido = lucro_com_taxas - taxa_rede
     return lucro_liquido
+
+def calcular_percentual_retorno(preco_compra: float, preco_venda: float, quantidade: float,
+                                 taxa_compra: float, taxa_venda: float, taxa_rede: float) -> float:
+    """
+    Calcula o percentual de retorno de uma operacao de arbitragem,
+    com base no lucro liquido dividido pelo capital investido.
+
+    Os parametros sao os mesmos de calcular_lucro_liquido.
+    Retorna o percentual (ex: 0.55 significa 0.55%).
+    """
+    lucro_liquido = calcular_lucro_liquido(preco_compra, preco_venda, quantidade, taxa_compra, taxa_venda, taxa_rede)
+    custo_investido = preco_compra * quantidade * (1 + taxa_compra)
+    percentual_retorno = (lucro_liquido / custo_investido) * 100
+    return percentual_retorno

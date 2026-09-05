@@ -26,3 +26,14 @@ lucro_final_teste = calcular_lucro_liquido(
     taxa_rede=2.0
 )
 print("Lucro liquido de teste:", lucro_final_teste)
+from src.arbitrage.calculator import calcular_percentual_retorno
+
+percentual_teste = calcular_percentual_retorno(
+    preco_compra=100000,
+    preco_venda=101000,
+    quantidade=0.01,
+    taxa_compra=0.001,
+    taxa_venda=0.0015,
+    taxa_rede=2.0
+)
+print("Percentual de retorno de teste:", percentual_teste)
