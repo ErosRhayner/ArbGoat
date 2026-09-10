@@ -60,3 +60,31 @@ def test_aplicar_slippage():
     )
     assert round(preco_compra_ajustado, 2) == 100050.0
     assert round(preco_venda_ajustado, 2) == 100949.5
+from src.arbitrage.calculator import (
+    calcular_lucro_bruto,
+    calcular_lucro_com_taxas,
+    calcular_lucro_liquido,
+    calcular_percentual_retorno,
+    calcular_spread_percentual,
+    aplicar_slippage,
+    operacao_e_segura,
+)
+
+def test_operacao_e_segura_quando_retorno_e_bom():
+    resultado = operacao_e_segura(
+        preco_compra=100000, preco_venda=101000, quantidade=0.01,
+        taxa_compra=0.001, taxa_venda=0.0015, taxa_rede=2.0,
+        slippage_compra=0.0005, slippage_venda=0.0005,
+        margem_minima=0.2
+    )
+    assert resultado == True
+
+
+def test_operacao_nao_e_segura_quando_margem_muito_alta():
+    resultado = operacao_e_segura(
+        preco_compra=100000, preco_venda=101000, quantidade=0.01,
+        taxa_compra=0.001, taxa_venda=0.0015, taxa_rede=2.0,
+        slippage_compra=0.0005, slippage_venda=0.0005,
+        margem_minima=5.0
+    )
+    assert resultado == False

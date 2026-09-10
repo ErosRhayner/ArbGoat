@@ -86,3 +86,27 @@ def aplicar_slippage(preco_compra: float, preco_venda: float,
     preco_compra_ajustado = preco_compra * (1 + slippage_compra)
     preco_venda_ajustado = preco_venda * (1 - slippage_venda)
     return (preco_compra_ajustado, preco_venda_ajustado)
+
+def operacao_e_segura(preco_compra: float, preco_venda: float, quantidade: float,
+                       taxa_compra: float, taxa_venda: float, taxa_rede: float,
+                       slippage_compra: float, slippage_venda: float,
+                       margem_minima: float) -> bool:
+    """
+    Decide se uma operacao de arbitragem e segura o suficiente para prosseguir,
+    considerando taxas, rede, slippage estimado e uma margem de seguranca minima.
+
+    margem_minima: percentual minimo de retorno exigido, em decimal
+                   (ex: 0.2 significa exigir pelo menos 0.2% de retorno)
+
+    Retorna True se a operacao atende a margem minima, False caso contrario.
+    """
+    preco_compra_ajustado, preco_venda_ajustado = aplicar_slippage(
+        preco_compra, preco_venda, slippage_compra, slippage_venda
+    )
+
+    percentual_retorno = calcular_percentual_retorno(
+        preco_compra_ajustado, preco_venda_ajustado, quantidade,
+        taxa_compra, taxa_venda, taxa_rede
+    )
+
+    return percentual_retorno >= margem_minima
