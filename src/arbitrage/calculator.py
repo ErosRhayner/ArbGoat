@@ -70,3 +70,19 @@ def calcular_spread_percentual(preco_compra: float, preco_venda: float) -> float
     """
     spread_percentual = ((preco_venda - preco_compra) / preco_compra) * 100
     return spread_percentual
+
+def aplicar_slippage(preco_compra: float, preco_venda: float,
+                      slippage_compra: float, slippage_venda: float) -> tuple:
+    """
+    Ajusta os precos de compra e venda para refletir o slippage estimado.
+    O slippage sempre piora o preco: aumenta o preco de compra
+    e diminui o preco de venda.
+
+    slippage_compra: percentual estimado de piora na compra, em decimal (ex: 0.0005 para 0.05%)
+    slippage_venda: percentual estimado de piora na venda, em decimal (ex: 0.0005 para 0.05%)
+
+    Retorna uma tupla: (preco_compra_ajustado, preco_venda_ajustado)
+    """
+    preco_compra_ajustado = preco_compra * (1 + slippage_compra)
+    preco_venda_ajustado = preco_venda * (1 - slippage_venda)
+    return (preco_compra_ajustado, preco_venda_ajustado)

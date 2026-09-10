@@ -44,3 +44,19 @@ from src.arbitrage.calculator import (
 def test_calcular_spread_percentual():
     resultado = calcular_spread_percentual(preco_compra=100000, preco_venda=101000)
     assert round(resultado, 2) == 1.0
+from src.arbitrage.calculator import (
+    calcular_lucro_bruto,
+    calcular_lucro_com_taxas,
+    calcular_lucro_liquido,
+    calcular_percentual_retorno,
+    calcular_spread_percentual,
+    aplicar_slippage,
+)
+
+def test_aplicar_slippage():
+    preco_compra_ajustado, preco_venda_ajustado = aplicar_slippage(
+        preco_compra=100000, preco_venda=101000,
+        slippage_compra=0.0005, slippage_venda=0.0005
+    )
+    assert round(preco_compra_ajustado, 2) == 100050.0
+    assert round(preco_venda_ajustado, 2) == 100949.5
