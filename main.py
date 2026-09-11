@@ -23,3 +23,7 @@ oportunidade = detectar_oportunidade(
     margem_minima=0.1
 )
 print("Resultado da analise:", oportunidade)
+from src.data.registro import registrar_oportunidade
+
+registrar_oportunidade(oportunidade)
+print("Oportunidade registrada em src/data/historico_oportunidades.jsonl")
