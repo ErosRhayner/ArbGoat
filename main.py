@@ -9,3 +9,17 @@ from src.exchanges.bitget import buscar_preco as buscar_preco_bitget
 
 preco_usdt_brl_bitget = buscar_preco_bitget("USDTBRL")
 print("Preco atual USDT/BRL na Bitget:", preco_usdt_brl_bitget)
+from src.arbitrage.detector import detectar_oportunidade
+
+oportunidade = detectar_oportunidade(
+    par_binance="USDTBRL",
+    par_bitget="USDTBRL",
+    quantidade=1000,
+    taxa_compra=0.001,
+    taxa_venda=0.0015,
+    taxa_rede=2.0,
+    slippage_compra=0.0005,
+    slippage_venda=0.0005,
+    margem_minima=0.1
+)
+print("Resultado da analise:", oportunidade)
