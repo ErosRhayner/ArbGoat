@@ -1,6 +1,6 @@
 from src.exchanges.binance import buscar_preco as buscar_preco_binance
 from src.exchanges.bitget import buscar_preco as buscar_preco_bitget
-from src.arbitrage.calculator import operacao_e_segura, calcular_percentual_retorno
+from src.arbitrage.calculator import operacao_e_segura, calcular_percentual_retorno, calcular_lucro_liquido
 
 
 def detectar_oportunidade(par_binance: str, par_bitget: str, quantidade: float,
@@ -30,6 +30,10 @@ def detectar_oportunidade(par_binance: str, par_bitget: str, quantidade: float,
         preco_compra, preco_venda, quantidade, taxa_compra, taxa_venda, taxa_rede
     )
 
+    lucro_liquido = calcular_lucro_liquido(
+        preco_compra, preco_venda, quantidade, taxa_compra, taxa_venda, taxa_rede
+    )
+
     e_segura = operacao_e_segura(
         preco_compra, preco_venda, quantidade,
         taxa_compra, taxa_venda, taxa_rede,
@@ -42,6 +46,7 @@ def detectar_oportunidade(par_binance: str, par_bitget: str, quantidade: float,
         "preco_compra": preco_compra,
         "preco_venda": preco_venda,
         "percentual_retorno": percentual_retorno,
+        "lucro_liquido": lucro_liquido,
         "operacao_segura": e_segura,
     }
     return resultado
