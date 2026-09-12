@@ -37,3 +37,7 @@ print("Saldo apos simular um lucro de R$50:", novo_saldo)
 from src.utils.config import BINANCE_API_KEY
 
 print("Chave da Binance carregada:", BINANCE_API_KEY)
+from src.exchanges.mexc import buscar_preco as buscar_preco_mexc
+
+preco_usdt_brl_mexc = buscar_preco_mexc("USDTBRL")
+print("Preco atual USDT/BRL na MEXC:", preco_usdt_brl_mexc)
