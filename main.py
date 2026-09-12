@@ -27,3 +27,10 @@ from src.data.registro import registrar_oportunidade
 
 registrar_oportunidade(oportunidade)
 print("Oportunidade registrada em src/data/historico_oportunidades.jsonl")
+from src.data.carteira import carregar_saldo, atualizar_saldo
+
+saldo = carregar_saldo()
+print("Saldo inicial da carteira:", saldo)
+
+novo_saldo = atualizar_saldo(50.0)
+print("Saldo apos simular um lucro de R$50:", novo_saldo)
