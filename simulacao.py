@@ -2,8 +2,10 @@ import time
 import requests
 from src.arbitrage.detector import detectar_oportunidade
 from src.data.registro import registrar_oportunidade
+from src.data.carteira import carregar_saldo, atualizar_saldo
 
 print("Simulacao iniciada. Pressione Ctrl+C para parar.")
+print("Saldo inicial da carteira:", carregar_saldo())
 
 while True:
     try:
@@ -21,6 +23,10 @@ while True:
 
         registrar_oportunidade(oportunidade)
         print(oportunidade)
+
+        if oportunidade["operacao_segura"]:
+            novo_saldo = atualizar_saldo(oportunidade["lucro_liquido"])
+            print("Operacao executada (simulada)! Novo saldo:", novo_saldo)
 
     except requests.exceptions.RequestException as erro:
         print("Falha ao buscar dados de uma corretora, tentando novamente no proximo ciclo:", erro)
