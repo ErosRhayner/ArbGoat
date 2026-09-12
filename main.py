@@ -34,3 +34,6 @@ print("Saldo inicial da carteira:", saldo)
 
 novo_saldo = atualizar_saldo(50.0)
 print("Saldo apos simular um lucro de R$50:", novo_saldo)
+from src.utils.config import BINANCE_API_KEY
+
+print("Chave da Binance carregada:", BINANCE_API_KEY)
