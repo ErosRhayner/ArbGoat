@@ -10,8 +10,7 @@ print("Saldo inicial da carteira:", carregar_saldo())
 while True:
     try:
         oportunidade = detectar_oportunidade(
-            par_binance="USDTBRL",
-            par_bitget="USDTBRL",
+            par="USDTBRL",
             quantidade=1000,
             taxa_compra=0.001,
             taxa_venda=0.0015,
