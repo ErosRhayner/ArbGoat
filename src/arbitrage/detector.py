@@ -14,11 +14,18 @@ CORRETORAS = {
 def buscar_precos_todas_corretoras(par: str) -> dict:
     """
     Busca o preco atual de um par em todas as corretoras cadastradas em CORRETORAS.
-    Retorna um dicionario no formato {nome_da_corretora: preco}.
+    Corretoras que nao tem esse par (ou falham por qualquer motivo) sao
+    simplesmente ignoradas, em vez de quebrar a busca inteira.
+
+    Retorna um dicionario no formato {nome_da_corretora: preco}, contendo
+    apenas as corretoras que responderam com sucesso.
     """
     precos = {}
     for nome, funcao_buscar_preco in CORRETORAS.items():
-        precos[nome] = funcao_buscar_preco(par)
+        try:
+            precos[nome] = funcao_buscar_preco(par)
+        except Exception as erro:
+            print(f"Aviso: {nome} nao tem o par {par} ou falhou ({erro}). Ignorando.")
     return precos
 
 
@@ -31,9 +38,15 @@ def detectar_oportunidade(par: str, quantidade: float,
     com maior spread bruto (menor preco de compra, maior preco de venda),
     aplica slippage, e avalia se a operacao e segura.
 
+    Corretoras que nao tem o par sao ignoradas automaticamente.
+    Levanta ValueError se menos de 2 corretoras tiverem preco disponivel.
+
     Retorna um dicionario com os detalhes da melhor rota encontrada.
     """
     precos = buscar_precos_todas_corretoras(par)
+
+    if len(precos) < 2:
+        raise ValueError(f"Menos de 2 corretoras disponiveis para o par {par}. Nao e possivel calcular arbitragem.")
 
     corretora_compra = min(precos, key=precos.get)
     corretora_venda = max(precos, key=precos.get)
