@@ -1,3 +1,4 @@
+import requests
 from src.exchanges.binance import buscar_preco as buscar_preco_binance
 from src.exchanges.bitget import buscar_preco as buscar_preco_bitget
 from src.exchanges.mexc import buscar_preco as buscar_preco_mexc
@@ -17,6 +18,9 @@ def buscar_precos_todas_corretoras(par: str) -> dict:
     Corretoras que nao tem esse par (ou falham por qualquer motivo) sao
     simplesmente ignoradas, em vez de quebrar a busca inteira.
 
+    Diferencia falhas de rede (temporarias) de respostas em formato inesperado
+    (geralmente sinal de que o par nao existe naquela corretora).
+
     Retorna um dicionario no formato {nome_da_corretora: preco}, contendo
     apenas as corretoras que responderam com sucesso.
     """
@@ -24,8 +28,12 @@ def buscar_precos_todas_corretoras(par: str) -> dict:
     for nome, funcao_buscar_preco in CORRETORAS.items():
         try:
             precos[nome] = funcao_buscar_preco(par)
+        except requests.exceptions.RequestException as erro:
+            print(f"Aviso: falha de rede ao consultar {nome} para o par {par}. Ignorando. Detalhe: {erro}")
+        except (KeyError, TypeError) as erro:
+            print(f"Aviso: {nome} provavelmente nao possui o par {par} (resposta em formato inesperado). Ignorando.")
         except Exception as erro:
-            print(f"Aviso: {nome} nao tem o par {par} ou falhou ({erro}). Ignorando.")
+            print(f"Aviso: erro inesperado ao consultar {nome} para o par {par}. Ignorando. Detalhe: {erro}")
     return precos
 
 
