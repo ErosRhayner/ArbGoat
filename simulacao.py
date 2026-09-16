@@ -26,8 +26,12 @@ while True:
             )
 
             oportunidade["par"] = par
-            registrar_oportunidade(oportunidade)
-            print(oportunidade)
+            foi_registrado = registrar_oportunidade(oportunidade)
+
+            if foi_registrado:
+                print(oportunidade)
+            else:
+                print(f"{par}: preco sem mudanca, nao registrado.")
 
             if oportunidade["operacao_segura"]:
                 novo_saldo = atualizar_saldo(oportunidade["lucro_liquido"])
