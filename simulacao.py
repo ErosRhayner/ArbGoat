@@ -1,5 +1,6 @@
 import time
 import requests
+import winsound
 from src.arbitrage.detector import detectar_oportunidade
 from src.data.registro import registrar_oportunidade
 from src.data.carteira import carregar_saldo, atualizar_saldo
@@ -31,6 +32,10 @@ while True:
             if oportunidade["operacao_segura"]:
                 novo_saldo = atualizar_saldo(oportunidade["lucro_liquido"])
                 print("Operacao executada (simulada)! Novo saldo:", novo_saldo)
+                print("!!! OPORTUNIDADE SEGURA ENCONTRADA !!!")
+                winsound.Beep(1000, 300)
+                winsound.Beep(1500, 300)
+                winsound.Beep(1000, 300)
 
         except (requests.exceptions.RequestException, ValueError) as erro:
             print(f"Falha ao analisar o par {par}, tentando novamente no proximo ciclo:", erro)
