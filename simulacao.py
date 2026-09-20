@@ -5,7 +5,7 @@ from src.arbitrage.detector import detectar_oportunidade
 from src.data.registro import registrar_oportunidade
 from src.data.carteira import carregar_saldo, atualizar_saldo
 
-PARES_MONITORADOS = ["USDTBRL", "USDCBRL"]
+PARES_MONITORADOS = ["USDTBRL", "USDCBRL", "USDCUSDT"]
 
 print("Simulacao iniciada. Pressione Ctrl+C para parar.")
 print("Pares monitorados:", PARES_MONITORADOS)
