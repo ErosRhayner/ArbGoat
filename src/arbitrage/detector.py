@@ -2,6 +2,7 @@ import requests
 from src.exchanges.binance import buscar_preco as buscar_preco_binance
 from src.exchanges.bitget import buscar_preco as buscar_preco_bitget
 from src.exchanges.mexc import buscar_preco as buscar_preco_mexc
+from src.exchanges.okx import buscar_preco as buscar_preco_okx
 from src.arbitrage.calculator import calcular_percentual_retorno, calcular_lucro_liquido, aplicar_slippage
 
 
@@ -9,6 +10,7 @@ CORRETORAS = {
     "Binance": buscar_preco_binance,
     "Bitget": buscar_preco_bitget,
     "MEXC": buscar_preco_mexc,
+    "OKX": buscar_preco_okx,
 }
 
 
