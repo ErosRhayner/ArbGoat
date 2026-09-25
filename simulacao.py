@@ -5,18 +5,23 @@ from src.arbitrage.detector import detectar_oportunidade
 from src.data.registro import registrar_oportunidade
 from src.data.carteira import carregar_saldo, atualizar_saldo
 
-PARES_MONITORADOS = ["USDTBRL", "USDCBRL", "USDCUSDT"]
+PARES_MONITORADOS = {
+    "USDTBRL": 1000,
+    "USDCBRL": 1000,
+    "BTCBRL": 0.00227,
+    "ETHBRL": 0.07153,
+}
 
 print("Simulacao iniciada. Pressione Ctrl+C para parar.")
-print("Pares monitorados:", PARES_MONITORADOS)
+print("Pares monitorados:", list(PARES_MONITORADOS.keys()))
 print("Saldo inicial da carteira:", carregar_saldo())
 
 while True:
-    for par in PARES_MONITORADOS:
+    for par, quantidade in PARES_MONITORADOS.items():
         try:
             oportunidade = detectar_oportunidade(
                 par=par,
-                quantidade=1000,
+                quantidade=quantidade,
                 taxa_compra=0.001,
                 taxa_venda=0.0015,
                 taxa_rede=2.0,
