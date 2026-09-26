@@ -5,16 +5,22 @@ from src.arbitrage.detector import detectar_oportunidade
 from src.data.registro import registrar_oportunidade
 from src.data.carteira import carregar_saldo, atualizar_saldo
 
+# Quantidade de cada par equivalente a aproximadamente R$1.000 investidos
+# USDT/BRL: R$1.000 / R$5.18 = ~193 unidades
+# USDC/BRL: R$1.000 / R$5.18 = ~193 unidades
+# BTC/BRL:  R$1.000 / R$440.000 = ~0.00227 BTC
+# ETH/BRL:  R$1.000 / R$14.000 = ~0.07143 ETH
 PARES_MONITORADOS = {
-    "USDTBRL": 1000,
-    "USDCBRL": 1000,
+    "USDTBRL": 193,
+    "USDCBRL": 193,
     "BTCBRL": 0.00227,
-    "ETHBRL": 0.07153,
+    "ETHBRL": 0.07143,
 }
 
 print("Simulacao iniciada. Pressione Ctrl+C para parar.")
 print("Pares monitorados:", list(PARES_MONITORADOS.keys()))
 print("Saldo inicial da carteira:", carregar_saldo())
+print("Valor simulado por par: ~R$1.000")
 
 while True:
     for par, quantidade in PARES_MONITORADOS.items():

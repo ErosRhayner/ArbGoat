@@ -4,3 +4,4 @@ __pycache__/
 .env
 src/data/historico_oportunidades.jsonl
 src/data/carteira.json
+resultado_analise.txt
