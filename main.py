@@ -10,7 +10,7 @@ CORRETORAS_TESTE = {
     "OKX": teste_okx,
 }
 
-for par_teste in ["BTCBRL", "ETHBRL"]:
+for par_teste in ["BNBBRL", "SOLBRL", "XRPBRL"]:
     print(f"--- Testando {par_teste} ---")
     for nome, funcao in CORRETORAS_TESTE.items():
         try:
