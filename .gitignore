@@ -6,3 +6,4 @@ src/data/historico_oportunidades.jsonl
 src/data/carteira.json
 resultado_analise.txt
 criar_simulacao.py
+criar_dashboard.py
